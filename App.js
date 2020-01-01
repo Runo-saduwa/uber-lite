@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Main from './src/main';
+// import Root from './src/main';
 
-export default function App(props) {
+export default function App() {
   return (
     <View style={styles.container}>
-       <Main {...props}/>
+       <Text>Hello</Text>
     </View>
   );
 }
