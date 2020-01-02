@@ -1,17 +1,18 @@
-import update from 'react-addons-update';
-// import constants from './actionConstants';
 
-// const {} = constants;
+ import {SET_NAME} from '../actions/types';
 
 
-const initialState = {};
+const initialState = {
+  name: 'yooo'
+};
 
 
 export const HomeReducer = (state = initialState, action) => {
     switch (action.type) {
-        case HOME:
+        case SET_NAME:
           return {
-            ...state
+            ...state,
+            name: action.payload
           };
         default:
           return state;

@@ -1,21 +1,13 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 
 import Home from './src/routes/Home/components/Home';
 
 import {Provider} from 'react-redux';
 import store from './src/store';
-// import Root from './src/main';
 
-
-  const RootStack = createStackNavigator(
-    {
-      Home: Home   
-    }
-  ); 
-  const AppContainer = createAppContainer(RootStack);
 
 
 export default function App() {
@@ -26,6 +18,29 @@ export default function App() {
     
   );
 }
+
+
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+  const RootStack = createStackNavigator(
+    {
+      Home: Home,
+      Details:DetailsScreen
+    },
+    {
+      initialRouteName: 'Home',
+    }
+  ); 
+  const AppContainer = createAppContainer(RootStack);
+
+
 
 
 const styles = StyleSheet.create({

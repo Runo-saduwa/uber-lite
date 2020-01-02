@@ -1,14 +1,39 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, { useEffect } from 'react';
+import {View, Text, Button} from 'react-native';
+import {connect} from 'react-redux';
+import {setName} from '../../../actions/homeActions';
+
+// import action creator from actions
 
 
-const Home = () => {
+const Home = ({name, setName, navigation}) => {
+
+    useEffect(() => {
+          
+
+        setName()
+        // return () => {
+        //     cleanup
+        // };
+    }, [])
     return (
         <View style={{flex:1, justifyContent:"center", alignItems:'center'}}>
-              <Text>Hello World</Text>
+<Text>Hello World {name}</Text>
+              <Button
+          title="Go to Details"
+          onPress={() => navigation.navigate('Details')}
+        />
         </View>
     )
 }
 
+const mapStateToProps = (state) => {
+   return {
+    name: state.home.name
+   } 
+}
 
-export default Home;
+
+
+
+export default connect(mapStateToProps, {setName})(Home);
