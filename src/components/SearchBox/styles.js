@@ -1,6 +1,7 @@
 import { Dimensions } from "react-native";
 var width = Dimensions.get("window").width; //full width
 const styles = {
+
     searchBox:{
         top:0,
         position:"absolute",
@@ -24,14 +25,16 @@ const styles = {
         borderRadius:7
     },
     inputSearch:{
-        fontSize:14
+        fontSize:18
     },
     label:{
         fontSize:10,
         fontStyle: "italic",
-        marginLeft:10,
+        // marginLeft:10,
+        paddingLeft: 10,
         marginTop:10,
-        marginBottom:0
+        marginBottom:0,
+        backgroundColor: 'white'
     }
 };
 

@@ -1,12 +1,15 @@
 
- import {SET_NAME, ERROR_LOCATION, SET_LOCATION} from '../actions/types';
+ import { ERROR_LOCATION, SET_LOCATION, GET_INPUT, TOGGLE_SEARCH_RESULT, GET_ADDRESS_PREDICTIONS} from '../actions/types';
 
 
 const initialState = {
   name: 'yooo',
   latitude: '',
   longitude: '',
-  error: ''
+  error: '',
+  inputData: {},
+  resultTypes: {},
+  predictions: []
 };
 
 
@@ -23,6 +26,41 @@ export const HomeReducer = (state = initialState, action) => {
             ...state,
             error: action.payload
           };
+          case GET_INPUT:
+            const {key, value} = action.payload 
+          return {
+              ...state,
+              inputData: {
+                [key]: value
+              }
+          };
+          case TOGGLE_SEARCH_RESULT: 
+          console.log(action.payload)
+          if(action.payload === "pickUp"){
+            return {
+              ...state,
+              resultTypes: {
+                pickUp: true,
+                dropOff: false
+              },
+              predictions: []
+            }
+          }
+          if(action.payload === "dropOff"){
+            return {
+              ...state,
+              resultTypes: {
+                pickUp: false,
+                dropOff: true
+              },
+              predictions: []
+            }
+          };
+          case GET_ADDRESS_PREDICTIONS: 
+          return {
+            ...state,
+            predictions: action.payload
+          }
         default:
           return state;
       }

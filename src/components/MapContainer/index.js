@@ -7,6 +7,8 @@ import {getUserLocation} from '../../actions/homeActions'
 import {Dimensions} from 'react-native';
 import styles from './styles';
 import SearchBox from '../SearchBox';
+import SearchResult from '../SearchResults';
+import { HitTestResultTypes } from 'expo/build/AR';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -15,7 +17,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = ASPECT_RATIO * LATITUDE_DELTA;
 
 
-const MapContainer = ({latitude, longitude, getUserLocation}) => {
+const MapContainer = ({latitude, longitude, getUserLocation, getInputData, toggleSearchResult, getAddressPredictions, resultTypes, predictions}) => {
 
     useEffect(() => {
           getUserLocation();
@@ -37,7 +39,10 @@ const MapContainer = ({latitude, longitude, getUserLocation}) => {
                coordinate={region}
                />
            </MapView>
-           <SearchBox/>
+           <SearchBox getInputData={getInputData} toggleSearchResult={toggleSearchResult} getAddressPredictions={getAddressPredictions}/>
+           {
+               (resultTypes.pickUp || resultTypes.dropOff) && <SearchResult predictions={predictions}/>
+           }
         </View>
     )
 }

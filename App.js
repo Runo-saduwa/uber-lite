@@ -32,12 +32,21 @@ class DetailsScreen extends React.Component {
 }
   const RootStack = createStackNavigator(
     {
-      Home: Home,
+      Home: {
+        screen: Home,
+        navigationOptions: {
+          title: 'Home',
+          header: null
+        }
+      },
       Details:DetailsScreen
     },
     {
       initialRouteName: 'Home',
-    }
+    },
+    // {
+    //   headerMode: 'none'
+    // }
   ); 
   const AppContainer = createAppContainer(RootStack);
 

@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
 import {View, Text, Button} from 'react-native';
 import {connect} from 'react-redux';
-import {setName} from '../../../actions/homeActions';
+import HeaderContainer from '../../../components/Header';
+import FooterContainer from '../../../components/Footer';
 import MapContainer from '../../../components/MapContainer';
 import {Container} from 'native-base';
+import {getInputData, toggleSearchResult, getAddressPredictions} from '../../../actions/homeActions';
 
 // import action creator from actions
 
 
-const Home = ({name, setName, navigation}) => {
-
-    useEffect(() => {
+const Home = ({navigation, getInputData, inputData, toggleSearchResult, getAddressPredictions, resultTypes, predictions}) => {
+//   console.log(inputData.pickUp, inputData.dropOff)
+    // useEffect(() => {
           
 
-        setName()
-        // return () => {
-        //     cleanup
-        // };
-    }, [])
+    //     // return () => {
+    //     //     cleanup
+    //     // };
+    // }, [])
     return (
         <Container>
 {/* <Text>Hello World {name}</Text>
@@ -25,18 +26,28 @@ const Home = ({name, setName, navigation}) => {
           title="Go to Details"
           onPress={() => navigation.navigate('Details')}
         /> */}
-        <MapContainer/>
+        <HeaderContainer/>
+        <MapContainer 
+        getInputData={getInputData} 
+        toggleSearchResult={toggleSearchResult}
+         getAddressPredictions={getAddressPredictions}
+          resultTypes={resultTypes}
+          predictions={predictions}
+          />
+          <FooterContainer/>
         </Container>
     )
 }
 
 const mapStateToProps = (state) => {
    return {
-    name: state.home.name
+    inputData: state.home.inputData || {},
+    resultTypes: state.home.resultTypes || {},
+    predictions: state.home.predictions || []
    } 
 }
 
 
 
 
-export default connect(mapStateToProps, {setName})(Home);
+export default connect(mapStateToProps, {getInputData, toggleSearchResult, getAddressPredictions})(Home);
