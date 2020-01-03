@@ -5,12 +5,12 @@ import HeaderContainer from '../../../components/Header';
 import FooterContainer from '../../../components/Footer';
 import MapContainer from '../../../components/MapContainer';
 import {Container} from 'native-base';
-import {getInputData, toggleSearchResult, getAddressPredictions} from '../../../actions/homeActions';
+import {getInputData, toggleSearchResult, getAddressPredictions, getSelectedAddress} from '../../../actions/homeActions';
 
 // import action creator from actions
 
 
-const Home = ({navigation, getInputData, inputData, toggleSearchResult, getAddressPredictions, resultTypes, predictions}) => {
+const Home = ({navigation, getInputData, inputData, toggleSearchResult, getAddressPredictions, resultTypes, predictions, getSelectedAddress}) => {
 //   console.log(inputData.pickUp, inputData.dropOff)
     // useEffect(() => {
           
@@ -33,6 +33,7 @@ const Home = ({navigation, getInputData, inputData, toggleSearchResult, getAddre
          getAddressPredictions={getAddressPredictions}
           resultTypes={resultTypes}
           predictions={predictions}
+          getSelectedAddress={getSelectedAddress}
           />
           <FooterContainer/>
         </Container>
@@ -50,4 +51,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, {getInputData, toggleSearchResult, getAddressPredictions})(Home);
+export default connect(mapStateToProps, {getInputData, toggleSearchResult, getAddressPredictions, getSelectedAddress})(Home);

@@ -3,10 +3,13 @@ import {Text} from 'react-native';
 import {View, ListItem, List, Left, Body} from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
+//import { getSelectedAddress } from '../../actions/homeActions';
 
 
-const SearchResults = ({predictions}) => {
-   
+const SearchResults = ({predictions, getSelectedAddress}) => {
+   const handleSelectedAddress = (id) => {
+       getSelectedAddress(id)
+   }
     return (
         <View style={styles.searchResultsWrapper}>
             <List
@@ -14,7 +17,7 @@ const SearchResults = ({predictions}) => {
               renderRow={(item) => {
                   return(
                       <View>
-                              <ListItem button avatar>
+                              <ListItem onPress={() => handleSelectedAddress(item.place_id)} button avatar>
                 <Left style={styles.leftContainer}>
                     <Icon style={styles.leftIcon} name="location-on"/>
                 </Left>

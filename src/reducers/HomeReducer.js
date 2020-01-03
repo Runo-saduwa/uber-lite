@@ -1,15 +1,22 @@
 
- import { ERROR_LOCATION, SET_LOCATION, GET_INPUT, TOGGLE_SEARCH_RESULT, GET_ADDRESS_PREDICTIONS} from '../actions/types';
+ import { ERROR_LOCATION,
+   SET_LOCATION,
+    GET_INPUT, 
+    TOGGLE_SEARCH_RESULT,
+     GET_ADDRESS_PREDICTIONS,
+      GET_SELECTED_ADDRESS,
+      GET_DISTANCE_MATRIX
+    } from '../actions/types';
 
 
 const initialState = {
-  name: 'yooo',
   latitude: '',
   longitude: '',
   error: '',
   inputData: {},
   resultTypes: {},
-  predictions: []
+  predictions: [],
+  selectedAddress: {}
 };
 
 
@@ -35,7 +42,7 @@ export const HomeReducer = (state = initialState, action) => {
               }
           };
           case TOGGLE_SEARCH_RESULT: 
-          console.log(action.payload)
+          // console.log(action.payload)
           if(action.payload === "pickUp"){
             return {
               ...state,
@@ -60,7 +67,27 @@ export const HomeReducer = (state = initialState, action) => {
           return {
             ...state,
             predictions: action.payload
+          };
+          case GET_SELECTED_ADDRESS: 
+          let selectedTitle = state.resultTypes.pickUp ? "selectedPickUp" : "selectedDropOff";
+          return {
+            ...state,
+            selectedAddress: {
+              ...state.selectedAddress,
+              [selectedTitle]: action.payload
+            },
+            resultTypes: {
+              pickUp: false,
+              dropOff: false
+            }
+          };
+          case GET_DISTANCE_MATRIX:
+            console.log(action.payload)
+          return {
+            ...state,
+            distanceMatrix: action.payload
           }
+          
         default:
           return state;
       }
